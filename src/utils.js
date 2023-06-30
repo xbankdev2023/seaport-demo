@@ -6,6 +6,9 @@ const ethers = require('ethers');
 const { Seaport } = require('@opensea/seaport-js');
 
 const seaportBootstrap = async (pk) => {
+  if (!pk) {
+    throw new Error('缺少私钥');
+  }
   const provider = new ethers.providers.JsonRpcProvider(RPC);
   const wallet = new ethers.Wallet(pk, provider);
   const offerer = await wallet.getAddress();
